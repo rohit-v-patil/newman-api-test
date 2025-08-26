@@ -4,7 +4,7 @@
 	"values": [
 		{
 			"key": "postId",
-			"value": "1",
+			"value": "{{POST_ID}}",
 			"type": "default",
 			"enabled": true
 		}
