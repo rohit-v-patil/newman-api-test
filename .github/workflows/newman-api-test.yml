@@ -11,10 +11,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Step 2: Run Newman Action
+      # Step 2: Put client secret in postman env file
+      - name: Prepare test environment file
+        run: |
+          sed "s/{{POST_ID}}/${{ secrets.POST_ID }}/g" postman_env.json > env_with_secrets.json
+
+      # Step 3: Run Newman Action
       - name: Run API tests
         uses: matt-ball/newman-action@master
         with:
           collection: postman_collection.json
-          environment: postman_env.json
+          environment: env_with_secrets.json
           apiKey: ${{ secrets.POSTMAN_API_KEY }}
